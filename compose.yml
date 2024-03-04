@@ -19,3 +19,11 @@ services:
     image: media-microservice
     ports:
       - "8081:8081"
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.10.7-management
+    ports:
+      - "1883:1883"
+      - "5672:5672"
+      - "15672:15672"
