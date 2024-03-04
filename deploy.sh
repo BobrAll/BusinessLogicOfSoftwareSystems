@@ -1,5 +1,5 @@
-./mvnw blps clean install package
-./mvnw mediaMicroservice clean install package
+mvn -f blps clean install package
+mvn -f mediaMicroservice clean install package
 
 docker build blps/ -t "backend"
 docker build mediaMicroservice/ -t "media-microservice"
