@@ -10,6 +10,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 @Data
@@ -35,6 +36,7 @@ public class User implements UserDetails {
     private Boolean enabled;
     @ColumnDefault("0")
     private Double usdBalance;
+    private Calendar subscriptionExpiration;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

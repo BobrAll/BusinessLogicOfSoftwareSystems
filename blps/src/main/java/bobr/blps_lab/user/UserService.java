@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -63,14 +63,23 @@ public class UserService {
         ) {
             throw new AlreadyHaveSuperuserPermissionsException();
         } else {
-            if (user.getUsdBalance() < subPrice) {
+            if (user.getUsdBalance() < subPrice)
                 throw new NotEnoughMoneyException("You haven't enough money to buy subscription");
-            }
-            else {
-                user.setUsdBalance(user.getUsdBalance() - subPrice);
-            }
+
+            Calendar nextMonth = new GregorianCalendar();
+            nextMonth.add(Calendar.MONTH, 1);
+
+            user.setUsdBalance(user.getUsdBalance() - subPrice);
             user.setRole(Role.SUPERUSER);
+            user.setSubscriptionExpiration(nextMonth);
             save(user);
         }
+    }
+
+    public List<User> findUsersWithLessThanOneDaySubscription() {
+        Calendar calendar = new GregorianCalendar();
+        calendar.add(Calendar.DATE, 1);
+
+        return repository.findUsersBySubscriptionExpirationBefore(calendar);
     }
 }

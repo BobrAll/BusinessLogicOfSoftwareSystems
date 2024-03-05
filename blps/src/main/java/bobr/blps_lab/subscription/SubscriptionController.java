@@ -1,7 +1,10 @@
-package bobr.blps_lab.user;
+package bobr.blps_lab.subscription;
 
 import bobr.blps_lab.exceptions.user.UserNotSubscribedException;
 import bobr.blps_lab.realty.flat.FlatService;
+import bobr.blps_lab.user.Role;
+import bobr.blps_lab.user.User;
+import bobr.blps_lab.user.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
